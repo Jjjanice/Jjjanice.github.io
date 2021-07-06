@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>调起小程序调试</title>
+
+    <style type="text/css">
+        button {
+            width: 80%;
+            display: block;
+            background-color: #0052cc;
+            color: #fff;
+            border: 1px solid transparent;
+            margin: 0 auto;
+            margin-bottom: 50px;
+        }
+        .page {
+            height: 100%;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <button onclick="openWechat()">调起微信</button>
+        <button onclick="openMiniProgramn()">调起小程序</button>
+        <button onclick="getNavigator()">navigator</button>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function openWechat() {
+        try {
+            console.log('调起微信');
+            window.location.href = 'weixin://';
+        } catch (e) {
+            console.log('调起微信失败');
+            alert(`调起微信失败:${e}`)
+        }
+    };
+    function openMiniProgramn() {
+        const params = {
+            userName: 'gh_16e311dfb857',
+            path: '/pages/message/message?channel_id=902&card_name=appkjhm',
+            mnProgramType: '0'
+        };
+        try {
+            console.log('调起小程序');
+            const path = `baiduboxapp://v7/vendor/ad/openWXMnProgram?params=${encodeURIComponent(JSON.stringify(params))}`;
+            console.log(path);
+            window.location.href = `baiduboxapp://v7/vendor/ad/openWXMnProgram?params=${encodeURIComponent(JSON.stringify(params))}&callback=launchCallback`;
+        } catch (e) {
+            alert(`调起小程序失败:${e}`)
+        }
+    }
+    function launchCallback(res) {
+        alert(res);
+    }
+    function getNavigator() {
+        alert(`navigator:${navigator.userAgent}`)
+    }
+    </script>
+</html>
