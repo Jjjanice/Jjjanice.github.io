@@ -28,15 +28,20 @@
         <button onclick="openWechat()">调起微信</button>
         <button onclick="openMiniProgramn()">调起小程序</button>
         <button onclick="getNavigator()">navigator</button>
-        <button onclick="saveImg()">保存图片</button>
+        <button onclick="saveImg1()">保存图片1</button>
         <div id="imageWrapper">
-            <button onclick="toSave()">点击保存</button>
+            <img src="https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png"/>
+            <button onclick="saveImg2()">保存图片2</button>
         </div>
+        <button onclick="saveImg3()">保存图片3</button>
+        <button onclick="saveImg4('girlImg', '二维码名称')">保存图片4</button>
+        <img class="img" id="girlImg" src="http://test-saas-apis.mumway.com/mumwayportal/channelPromotion/activityCode?channelId=44" alt=""><br />
     </div>
 </body>
-
 <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script type="text/javascript">
+    const IMG_DEMO = "https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png";
+
     function openWechat() {
         try {
             console.log('调起微信');
@@ -67,7 +72,8 @@
     function getNavigator() {
         alert(`navigator:${navigator.userAgent}`)
     }
-    function saveImg() {
+    // 保存图片1
+    function saveImg1() {
         const Imgurl = "https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png";
         const blob=new Blob([''], {type:'application/octet-stream'});
         const url = URL.createObjectURL(blob);
@@ -79,7 +85,8 @@
         a.dispatchEvent(e);
         URL.revokeObjectURL(url);
     }
-    function toSave() {
+    // 保存图片2
+    function saveImg2() {
         html2canvas(document.getElementById("imageWrapper")).then(canvas => {
             let saveUrl = canvas.toDataURL('image/png')
             let aLink = document.createElement('a')
@@ -102,5 +109,39 @@
         }
         return new Blob([uInt8Array], {type: contentType})
     }
+    // 保存图片3
+    function saveImg3(){
+        var img = document.getElementById('girlImg');
+        var url = img.src;
+        var a = document.createElement('a');
+        var event = new MouseEvent('click')
+        a.download = 'imgName'
+        a.href = url;
+        a.dispatchEvent(event);
+    }
+    // 保存图片4
+    function saveImg4(selector, name) {
+        var image = new Image()
+        // 解决跨域 Canvas 污染问题
+        image.setAttribute('crossOrigin', 'anonymous')
+        image.onload = function () {
+            var canvas = document.createElement('canvas')
+            canvas.width = image.width
+            canvas.height = image.height
+
+            var context = canvas.getContext('2d')
+            context.drawImage(image, 0, 0, image.width, image.height)
+            var url = canvas.toDataURL('image/png')
+            var a = document.createElement('a')
+            // 创建一个单击事件
+            var event = new MouseEvent('click')
+            a.download = name || '下载图片名称'
+            a.href = url
+            // 触发a的单击事件
+            a.dispatchEvent(event)
+        }
+        image.src = document.getElementById(selector).src;
+    }
+
     </script>
 </html>
