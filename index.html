@@ -35,8 +35,9 @@
         </div>
         <button onclick="saveImg3()">保存图片3</button>
         <button onclick="saveImg4('girlImg', '二维码名称')">保存图片4</button>
+        <button onclick="saveImg5()">保存图片5</button>
         <img class="img" id="girlImg" src="http://test-saas-apis.mumway.com/mumwayportal/channelPromotion/activityCode?channelId=44" alt=""><br />
-        <a href="https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png" download>下载</a>
+        <a href="https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png" download rel="nofollow noreferrer">下载</a>
     </div>
 </body>
 <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -159,6 +160,10 @@
             a.dispatchEvent(event)
         }
         image.src = document.getElementById(selector).src;
+    }
+    // 保存图片5
+    function saveImg5() {
+        window.location.href = `baiduboxapp://v5/utils/saveImage?url=${IMG_DEMO}`;
     }
 
     </script>
