@@ -1,170 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <title>demo</title>
-
-    <style type="text/css">
-        button {
-            width: 80%;
-            display: block;
-            background-color: #0052cc;
-            color: #fff;
-            border: 1px solid transparent;
-            margin: 0 auto;
-            margin-bottom: 30px;
-        }
-        .page {
-            height: 100%;
-            margin-top: 100px;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>htmltopic</title>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<style>
+*{margin: 0;}
+.test {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    background-color: #5fbaac;
+    display: inline-block;
+    vertical-align: top;
+}
+canvas {
+    margin-right: 5px;
+}
+.down {
+    float: left;
+    margin: 40px 10px;
+}
+.down2 {
+    float: left;
+    margin: 40px 30px;
+}
+</style>
 </head>
-
 <body>
-    <div class="page">
-        <button onclick="openWechat()">调起微信</button>
-        <button onclick="openMiniProgramn()">调起小程序</button>
-        <button onclick="getNavigator()">navigator</button>
-        <button onclick="saveImg1()">保存图片1</button>
-        <div id="imageWrapper">
-            <img src="https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png"/>
-            <button onclick="saveImg2()">保存图片2</button>
-        </div>
-        <button onclick="saveImg3()">保存图片3</button>
-        <button onclick="saveImg4('girlImg', '二维码名称')">保存图片4</button>
-        <button onclick="saveImg5()">保存图片5</button>
-        <img class="img" id="girlImg" src="http://test-saas-apis.mumway.com/mumwayportal/channelPromotion/activityCode?channelId=44" alt=""><br />
-        <a href="https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png" download rel="nofollow noreferrer">下载</a>
-    </div>
+<div class="test">测试</div>
+<div><a class="down" href="" download="downImg">下载</a></div>
+<div><a class="down2" href="" download="downImg">下载2</a></div>
+<div><img id="img" src=""></div>
+ 
+<script>
+//直接选择要截图的dom，就能截图，但是因为canvas的原因，生成的图片模糊
+//html2canvas(document.querySelector('div')).then(function(canvas) {
+//    document.body.appendChild(canvas);
+//});
+//创建一个新的canvas
+var canvas2 = document.createElement("canvas");
+let _canvas = document.querySelector('div');
+var w = parseInt(window.getComputedStyle(_canvas).width);
+var h = parseInt(window.getComputedStyle(_canvas).height);
+//将canvas画布放大若干倍，然后盛放在较小的容器内，就显得不模糊了
+canvas2.width = w * 2;
+canvas2.height = h * 2;
+canvas2.style.width = w + "px";
+canvas2.style.height = h + "px";
+//可以按照自己的需求，对context的参数修改,translate指的是偏移量
+//  var context = canvas.getContext("2d");
+//  context.translate(0,0);
+var context = canvas2.getContext("2d");
+context.scale(2, 2);
+html2canvas(document.querySelector('div'), {
+    useCORS: true,
+    canvas: canvas2
+}).then(function(canvas) {
+    //document.body.appendChild(canvas);
+    //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
+    document.querySelector(".down").setAttribute('href', canvas.toDataURL());
+    img.src = canvas.toDataURL(); // 生成的图片
+});
+</script>
+ 
+<script>
+//这是另一种写法
+$(function () {
+    $(".down2").click(function () {
+    html2canvas($(".test")).then(function (canvas) {
+    var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url
+    window.location.href = imgUri; // 下载图片
+    });
+    //html2canvas($('.tongxingzheng_bg'), {
+    //    onrendered: function (canvas) {
+    //        var data = canvas.toDataURL("image/png");//生成的格式
+    //        //data就是生成的base64码啦
+    //        alert(data);
+    //    }
+    //});
+    });
+});
+</script>
 </body>
-<script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script type="text/javascript">
-    const IMG_DEMO = "https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png";
-
-    function openWechat() {
-        try {
-            console.log('调起微信');
-            window.location.href = 'weixin://';
-        } catch (e) {
-            console.log('调起微信失败');
-            alert(`调起微信失败:${e}`)
-        }
-    };
-    function openMiniProgramn() {
-        const params = {
-            userName: 'gh_16e311dfb857',
-            path: '/pages/message/message?channel_id=902&card_name=appkjhm',
-            mnProgramType: '0'
-        };
-        try {
-            console.log('调起小程序');
-            const path = `baiduboxapp://v7/vendor/ad/openWXMnProgram?params=${encodeURIComponent(JSON.stringify(params))}`;
-            console.log(path);
-            window.location.href = `baiduboxapp://v7/vendor/ad/openWXMnProgram?params=${encodeURIComponent(JSON.stringify(params))}&callback=launchCallback`;
-        } catch (e) {
-            alert(`调起小程序失败:${e}`)
-        }
-    }
-    function launchCallback(res) {
-        alert(res);
-    }
-    function getNavigator() {
-        alert(`navigator:${navigator.userAgent}`)
-    }
-    // 保存图片1
-    function saveImg1() {
-        var link = document.createElement("a");
-        var imgData = canvas.toDataURL({format: 'png', quality:1, width:20000, height:4000});
-        var strDataURI = imgData.substr(22, imgData.length);
-        var blob = dataURLtoBlob(imgData);
-        var objurl = URL.createObjectURL(blob);
-        link.download = "grid1.png";
-        link.href = objurl;
-        link.click();
-        
-        function  dataURLtoBlob(dataurl) {
-            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-            while(n--){
-                u8arr[n] = bstr.charCodeAt(n);
-            }
-            return new Blob([u8arr], {type:mime});
-        }
-        // const Imgurl = "https://fe-resource.cdn.bcebos.com/vector/wutong/wechat/wechat_dialog.png";
-        // const blob=new Blob([''], {type:'application/octet-stream'});
-        // const url = URL.createObjectURL(blob);
-        // const a = document.createElement('a');
-        // a.href = Imgurl;
-        // a.download = Imgurl.replace(/(.*\/)*([^.]+.*)/ig,"$2").split("?")[0];
-        // const e = document.createEvent('MouseEvents');
-        // e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        // a.dispatchEvent(e);
-        // URL.revokeObjectURL(url);
-    }
-    // 保存图片2
-    function saveImg2() {
-        html2canvas(document.getElementById("imageWrapper")).then(canvas => {
-            let saveUrl = canvas.toDataURL('image/png')
-            let aLink = document.createElement('a')
-            let blob = this.base64ToBlob(saveUrl)
-            let evt = document.createEvent('HTMLEvents')
-            evt.initEvent('click', true, true)
-            aLink.download = '二维码.jpg'
-            aLink.href = URL.createObjectURL(blob)
-            aLink.click()
-        });
-    }
-    function base64ToBlob(code) {
-        let parts = code.split(';base64,')
-        let contentType = parts[0].split(':')[1]
-        let raw = window.atob(parts[1])
-        let rawLength = raw.length
-        let uInt8Array = new Uint8Array(rawLength)
-        for (let i = 0; i < rawLength; ++i) {
-            uInt8Array[i] = raw.charCodeAt(i)
-        }
-        return new Blob([uInt8Array], {type: contentType})
-    }
-    // 保存图片3
-    function saveImg3(){
-        var img = document.getElementById('girlImg');
-        var url = img.src;
-        var a = document.createElement('a');
-        var event = new MouseEvent('click')
-        a.download = 'imgName'
-        a.href = url;
-        a.dispatchEvent(event);
-    }
-    // 保存图片4
-    function saveImg4(selector, name) {
-        var image = new Image()
-        // 解决跨域 Canvas 污染问题
-        image.setAttribute('crossOrigin', 'anonymous')
-        image.onload = function () {
-            var canvas = document.createElement('canvas')
-            canvas.width = image.width
-            canvas.height = image.height
-
-            var context = canvas.getContext('2d')
-            context.drawImage(image, 0, 0, image.width, image.height)
-            var url = canvas.toDataURL('image/png')
-            var a = document.createElement('a')
-            // 创建一个单击事件
-            var event = new MouseEvent('click')
-            a.download = name || '下载图片名称'
-            a.href = url
-            // 触发a的单击事件
-            a.dispatchEvent(event)
-        }
-        image.src = document.getElementById(selector).src;
-    }
-    // 保存图片5
-    function saveImg5() {
-        window.location.href = `baiduboxapp://v5/utils/saveImage?url=${IMG_DEMO}`;
-    }
-
-    </script>
 </html>
