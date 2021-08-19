@@ -70,9 +70,9 @@ html2canvas(document.querySelector('div'), {
 //这是另一种写法
 $(function () {
     $(".down2").click(function () {
-    html2canvas($(".test")).then(function (canvas) {
-    var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url
-    window.location.href = imgUri; // 下载图片
+    // html2canvas($(".test")).then(function (canvas) {
+    // var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url
+    window.location.href = 'https://jmy-pic.baidu.com/0/pic/871919429_-132990836.jpg'; // 下载图片
     });
     //html2canvas($('.tongxingzheng_bg'), {
     //    onrendered: function (canvas) {
