@@ -24,6 +24,7 @@
 <body>
     <div class="page">
         <button onclick="openWechat()">调起微信</button>
+        <button onclick="openWechatAdd()">打开微信加好友</button>
         <button onclick="openMiniProgramn()">调起小程序</button>
         <button onclick="getNavigator()">navigator</button>
         <button onclick="saveImg1()">保存图片1</button>
@@ -51,6 +52,9 @@
             alert(`调起微信失败:${e}`)
         }
     };
+    function openWechatAdd() {
+        window.location.href = 'weixin://dl/add';
+    }
     function openMiniProgramn() {
         const params = {
             userName: 'gh_16e311dfb857',
