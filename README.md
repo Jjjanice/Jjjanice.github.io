@@ -1,1 +1,1 @@
-# Jjjanice.github.io
+# Jjjanice.github.io - presonal blog
