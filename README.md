@@ -15,5 +15,15 @@ http://localhost:4000/
 ### 创建文章
 hexo new post 文章名称
 
+### 推送至远程
+hexo clean && hexo g && hexo d
+
+### hexo命令解读
+```
+hexo clean 清楚缓存文件（db.json和public静态文件）
+hexo generate 生成静态文件
+hexo deploy 推送至_config_yml中配置的远程分支
+```
+
 ### 参考文档
 https://blog.csdn.net/yaorongke/article/details/119089190
