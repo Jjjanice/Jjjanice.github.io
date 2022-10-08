@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>常用工具</title>
+    <link href="/2022/10/08/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/"/>
+    <url>/2022/10/08/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/</url>
+    
+    <content type="html"><![CDATA[<p>常用工具</p><h1 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h1><p>npm包查询：<a href="https://bundlephobia.com/">https://bundlephobia.com/</a><br>npm包比较：<a href="https://npmtrends.com/">https://npmtrends.com/</a></p><h1 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h1>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日常记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>常用命令</title>
     <link href="/2022/10/08/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <url>/2022/10/08/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
@@ -35,6 +60,12 @@
     
     <content type="html"><![CDATA[<p>使用js移位运算符取整</p><h1 id="运算符介绍"><a href="#运算符介绍" class="headerlink" title="运算符介绍"></a>运算符介绍</h1><h2 id="有符号右移"><a href="#有符号右移" class="headerlink" title="有符号右移"></a>有符号右移</h2><p><code>&gt;&gt;</code>该操作符会将指定操作数的二进制位向右移动指定的位数。<b>向右被移出的位被丢弃，拷贝最左侧的位以填充左侧。</b>由于新的最左侧的位总是和以前相同，符号位没有被改变。</p><h2 id="无符号右移"><a href="#无符号右移" class="headerlink" title="无符号右移"></a>无符号右移</h2><p><code>&gt;&gt;&gt;</code>该操作符会将第1个操作数向右移动指定的位数。<b>向右被移出的位被丢弃，左侧用0填充。</b>因为符号位变成了0，所以结果总是非负的.</p><h1 id="妙用"><a href="#妙用" class="headerlink" title="妙用"></a>妙用</h1><h2 id="用于取整"><a href="#用于取整" class="headerlink" title="用于取整"></a>用于取整</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">console</span>.log(<span class="hljs-number">3</span>.<span class="hljs-number">14</span> &gt;&gt; <span class="hljs-number">0</span>)  // <span class="hljs-number">3</span><br><span class="hljs-attribute">console</span>.log(<span class="hljs-number">3</span>.<span class="hljs-number">14</span> &gt;&gt;&gt; <span class="hljs-number">0</span>)  // <span class="hljs-number">3</span> (不可对负数取整)<br></code></pre></td></tr></table></figure><h2 id="用于获取除2之后的整数"><a href="#用于获取除2之后的整数" class="headerlink" title="用于获取除2之后的整数"></a>用于获取除2之后的整数</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">console</span>.log(<span class="hljs-number">5</span> &gt;&gt; <span class="hljs-number">1</span>)  // <span class="hljs-number">2</span><br><span class="hljs-attribute">console</span>.log(<span class="hljs-number">4</span> &gt;&gt; <span class="hljs-number">1</span>)  // <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>]]></content>
     
+    
+    <categories>
+      
+      <category>JavaScript</category>
+      
+    </categories>
     
     
     <tags>
