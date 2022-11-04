@@ -4,11 +4,36 @@
   
   
   <entry>
-    <title>webpack入门</title>
-    <link href="/2022/10/17/webpack%E5%85%A5%E9%97%A8/"/>
-    <url>/2022/10/17/webpack%E5%85%A5%E9%97%A8/</url>
+    <title>css经验</title>
+    <link href="/2022/11/04/css%E7%BB%8F%E9%AA%8C/"/>
+    <url>/2022/11/04/css%E7%BB%8F%E9%AA%8C/</url>
     
-    <content type="html"><![CDATA[<p>1.生成package.json文件</p><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> init<br></code></pre></td></tr></table></figure><p>2.安装webpack</p>]]></content>
+    <content type="html"><![CDATA[<p>#渐变抗锯齿</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>css 前端开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日常记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>图片引入与iconfont使用</title>
+    <link href="/2022/10/12/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/"/>
+    <url>/2022/10/12/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="图片引入与iconfont使用"><a href="#图片引入与iconfont使用" class="headerlink" title="图片引入与iconfont使用"></a>图片引入与iconfont使用</h1><h2 id="图片引入"><a href="#图片引入" class="headerlink" title="图片引入"></a>图片引入</h2><p>日常项目开发中，通常ue图中用到的图片ue会给我们切图，我们需要把图使用到代码中，通常使用的引入图片方式有：</p><ol><li>把图片放到代码库的静态资源中。<ul><li>优点：打包进产出，加载后运行时显示快</li><li>缺点：增大打包体积，影响包加载速度</li></ul></li><li>图片上传cdn，生成cdn链接使用url引入<ul><li>优点：可以替换cdn资源来更换图片内容，可以根据拦截器进行权限控制，可以缓存，不影响包体积情况下加载速度也很不错，是最常用的方式</li><li>缺点：需要考虑一些特殊场景，比如svg图片通过url引入使用image标签时，在ios上会很模糊</li></ul></li><li>图标类通过iconfont转base64使用<ul><li>优点：减少图片的http请求</li><li>缺点：base64相当于把字符串直接写在代码文件中，也会增加代码打包体积，一般只在加载小图标时使用</li></ul></li></ol><h2 id="iconfont使用"><a href="#iconfont使用" class="headerlink" title="iconfont使用"></a>iconfont使用</h2><h3 id="1-将要使用的图片上传至iconfont"><a href="#1-将要使用的图片上传至iconfont" class="headerlink" title="1.将要使用的图片上传至iconfont"></a>1.将要使用的图片上传至iconfont</h3><p><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/1.png" alt="1"><br>上传时可能需要几分钟审核，等待一段时间即可</p><h3 id="2-下载图标代码"><a href="#2-下载图标代码" class="headerlink" title="2.下载图标代码"></a>2.下载图标代码</h3><p>审核通过成功上传后，将图标添加进购物车，然后进购物车下载代码<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/2.png" alt="2"></p><p><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/3.png" alt="3"></p><h3 id="3-获取iconfont代码文件"><a href="#3-获取iconfont代码文件" class="headerlink" title="3.获取iconfont代码文件"></a>3.获取iconfont代码文件</h3><p>下载成功后，得到一个压缩文件，解压如下<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/4.png" alt="4"></p><h3 id="4-将下载的tff文件转换为base64格式"><a href="#4-将下载的tff文件转换为base64格式" class="headerlink" title="4.将下载的tff文件转换为base64格式"></a>4.将下载的tff文件转换为base64格式</h3><p>推荐使用网站：<a href="https://transfonter.org/">https://transfonter.org</a></p><p>按下图配置选项，打开 Base64 encode 选项：<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/5.png" alt="5"></p><p>配置完后，添加tff文件，开始转换<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/6.png" alt="6"></p><p>转换成功后，点击下载<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/7.png" alt="7"></p><p>下载得到压缩文件，解压后会有一个stylesheet.css的css文件<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/8.png" alt="8"></p><p>该css文件的字体地址就是base64了<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/9.png" alt="9"></p><h3 id="5-在项目中使用"><a href="#5-在项目中使用" class="headerlink" title="5.在项目中使用"></a>5.在项目中使用</h3><p>将上一步得到的css文件代码中的@font-face部分复制至代码中<br>以及第3步iconfont上下载得到的iconfont.css文件中的样式部分复制至代码中<br>最后项目里的css文件如下：<br><img src="/images/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/10.png" alt="10"></p><p>使用的地方：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;iconfont icon-back&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure><h2 id="Reference-Document"><a href="#Reference-Document" class="headerlink" title="Reference Document"></a>Reference Document</h2><p><a href="https://www.tytrock.com/topics/327">阿里巴巴 iconfont 字体转 base64 并引入使用</a></p>]]></content>
     
     
     <categories>
@@ -29,11 +54,11 @@
   
   
   <entry>
-    <title>图片引入与iconfont使用</title>
-    <link href="/2022/10/13/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/"/>
-    <url>/2022/10/13/%E5%9B%BE%E7%89%87%E5%BC%95%E5%85%A5%E4%B8%8Eiconfont%E4%BD%BF%E7%94%A8/</url>
+    <title>webpack入门</title>
+    <link href="/2022/10/11/webpack%E5%85%A5%E9%97%A8/"/>
+    <url>/2022/10/11/webpack%E5%85%A5%E9%97%A8/</url>
     
-    <content type="html"><![CDATA[<h1 id="图片引入与iconfont使用"><a href="#图片引入与iconfont使用" class="headerlink" title="图片引入与iconfont使用"></a>图片引入与iconfont使用</h1><h2 id="图片引入"><a href="#图片引入" class="headerlink" title="图片引入"></a>图片引入</h2><p>日常项目开发中，通常ue图中用到的图片ue会给我们切图，我们需要把图使用到代码中，通常使用的引入图片方式有：</p><ol><li>把图片放到代码库的静态资源中。<ul><li>优点：打包进产出，加载后运行时显示快</li><li>缺点：增大打包体积，影响包加载速度</li></ul></li><li>图片上传cdn，生成cdn链接使用url引入<ul><li>优点：可以替换cdn资源来更换图片内容，可以根据拦截器进行权限控制，可以缓存，不影响包体积情况下加载速度也很不错，是最常用的方式</li><li>缺点：需要考虑一些特殊场景，比如svg图片通过url引入使用image标签时，在ios上会很模糊</li></ul></li><li>图标类通过iconfont转base64使用<ul><li>优点：减少图片的http请求</li><li>缺点：base64相当于把字符串直接写在代码文件中，也会增加代码打包体积，一般只在加载小图标时使用</li></ul></li></ol><h2 id="iconfont使用"><a href="#iconfont使用" class="headerlink" title="iconfont使用"></a>iconfont使用</h2><h3 id="1-将要使用的图片上传至iconfont"><a href="#1-将要使用的图片上传至iconfont" class="headerlink" title="1.将要使用的图片上传至iconfont"></a>1.将要使用的图片上传至iconfont</h3><p>{ % 1.png 加入购物车 % }<br>上传时可能需要几分钟审核，等待一段时间即可</p><h3 id="2-下载图标代码"><a href="#2-下载图标代码" class="headerlink" title="2.下载图标代码"></a>2.下载图标代码</h3><p>审核通过成功上传后，将图标添加进购物车，然后进购物车下载代码<br>{ % 2.png 加入购物车 % }</p><p>{ % 3.png 下载代码 % }</p><h3 id="3-获取iconfont代码文件"><a href="#3-获取iconfont代码文件" class="headerlink" title="3.获取iconfont代码文件"></a>3.获取iconfont代码文件</h3><p>下载成功后，得到一个压缩文件，解压如下<br>{ % 4.png 解压的压缩文件 % }</p><h3 id="4-将下载的tff文件转换为base64格式"><a href="#4-将下载的tff文件转换为base64格式" class="headerlink" title="4.将下载的tff文件转换为base64格式"></a>4.将下载的tff文件转换为base64格式</h3><p>推荐使用网站：<a href="https://transfonter.org/">https://transfonter.org</a></p><p>按下图配置选项，打开 Base64 encode 选项：<br>{ % 5.png 配置 % }</p><p>配置完后，添加tff文件，开始转换<br>{ % 6.png 转换 % }</p><p>转换成功后，点击下载<br>{ % 7.png 点击下载 % }</p><p>下载得到压缩文件，解压后会有一个stylesheet.css的css文件<br>{ % 8.png 解压文件 % }</p><p>该css文件的字体地址就是base64了<br>{ % 9.png base64 % }</p><h3 id="5-在项目中使用"><a href="#5-在项目中使用" class="headerlink" title="5.在项目中使用"></a>5.在项目中使用</h3><p>将上一步得到的css文件代码中的@font-face部分复制至代码中<br>以及第3步iconfont上下载得到的iconfont.css文件中的样式部分复制至代码中<br>最后项目里的css文件如下：<br>{ % 10.png 项目代码 % }</p><p>使用的地方：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;iconfont icon-back&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br></code></pre></td></tr></table></figure><h2 id="Reference-Document"><a href="#Reference-Document" class="headerlink" title="Reference Document"></a>Reference Document</h2><p><a href="https://www.tytrock.com/topics/327">阿里巴巴 iconfont 字体转 base64 并引入使用</a></p>]]></content>
+    <content type="html"><![CDATA[<p>1.生成package.json文件</p><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coffeescript"><span class="hljs-built_in">npm</span> init<br></code></pre></td></tr></table></figure><p>2.安装webpack</p>]]></content>
     
     
     <categories>
