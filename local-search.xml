@@ -4,16 +4,41 @@
   
   
   <entry>
-    <title>css经验</title>
-    <link href="/2022/11/04/css%E7%BB%8F%E9%AA%8C/"/>
-    <url>/2022/11/04/css%E7%BB%8F%E9%AA%8C/</url>
+    <title>踩坑记录</title>
+    <link href="/2022/11/17/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <url>/2022/11/17/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
     
-    <content type="html"><![CDATA[<p>#渐变抗锯齿</p>]]></content>
+    <content type="html"><![CDATA[<p>常用工具</p><h1 id="css动画"><a href="#css动画" class="headerlink" title="css动画"></a>css动画</h1><p>卡顿：尽量避免使用margin、padding、left、right等来transform，更推荐使用translate、scale</p><h1 id="二维码解析"><a href="#二维码解析" class="headerlink" title="二维码解析"></a>二维码解析</h1><p>个别解析失败问题：todo</p>]]></content>
     
     
     <categories>
       
-      <category>css 前端开发</category>
+      <category>前端开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日常记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>css经验</title>
+    <link href="/2022/11/04/css%E7%BB%8F%E9%AA%8C/"/>
+    <url>/2022/11/04/css%E7%BB%8F%E9%AA%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="css经验"><a href="#css经验" class="headerlink" title="css经验"></a>css经验</h1><h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2><p>css渐变属性：linear-gradient</p><h3 id="渐变抗锯齿"><a href="#渐变抗锯齿" class="headerlink" title="渐变抗锯齿"></a>渐变抗锯齿</h3><p>锯齿现象：锯齿现象在DPR为1（如ios）的屏幕下特别明显，在dpr&gt;1的高清屏上则相较不明显。<br>锯齿产生原因：网页呈现是基于像素单位的，在一种颜色直接过渡到另外一种颜色时，容易导致可视质量下降。</p> <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-number">37deg</span>), <span class="hljs-number">#000</span> <span class="hljs-number">50%</span>, <span class="hljs-number">#f00</span> <span class="hljs-number">50%</span>, <span class="hljs-number">#f00</span>);<br></code></pre></td></tr></table></figure><p>比如以上代码在50%的地方从#000直接过渡到#f00，仔细看即可看到过渡处的锯齿。<br><img src="/images/css%E7%BB%8F%E9%AA%8C/1.png" alt="1"></p><h3 id="简单的解决方法"><a href="#简单的解决方法" class="headerlink" title="简单的解决方法"></a>简单的解决方法</h3><p>最简单的就是<b>不要直接过渡</b>。将上述代码从50%-50%的直接过渡，改成预留了1%的渐变过渡空间</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">background</span>: linear-gradient(<span class="hljs-number">37</span>deg), #<span class="hljs-number">000</span> <span class="hljs-number">49</span>.<span class="hljs-number">5</span>%, #f00 <span class="hljs-number">49</span>.<span class="hljs-number">5</span>%, #f00);<br></code></pre></td></tr></table></figure><p>即可有效处理过渡处的锯齿问题。改造后效果如下：<br><img src="/images/css%E7%BB%8F%E9%AA%8C/2.png" alt="2"></p><h2 id="css实现文字滚动"><a href="#css实现文字滚动" class="headerlink" title="css实现文字滚动"></a>css实现文字滚动</h2><p>css属性： animation、@keyframes、transform</p><h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">set<span class="hljs-constructor">Animation()</span> &#123;<br>    this.<span class="hljs-constructor">$nextTick(()</span> =&gt; &#123;<br>        const textDom = this.$refs.text;<br>        const canScroll = textDom?.clientWidth &lt; textDom?.scrollWidth;<br>        <span class="hljs-keyword">if</span> (canScroll) &#123;<br>            const styleEl = document.create<span class="hljs-constructor">Element(&#x27;<span class="hljs-params">style</span>&#x27;)</span>;<br>            styleEl.id = &#x27;textKeyframe&#x27;;<br>            document.head.append<span class="hljs-constructor">Child(<span class="hljs-params">styleEl</span>)</span>;<br>            const textKeyframe = `<br>                @keyframes wordsLoop &#123;<br>                    <span class="hljs-number">0</span>% &#123;<br>                        transform: translate<span class="hljs-constructor">X(0px)</span><br>                    &#125;<br>                    <span class="hljs-number">10</span>% &#123;<br>                        transform: translate<span class="hljs-constructor">X(0px)</span>;<br>                    &#125;<br>                    <span class="hljs-number">90</span>% &#123;<br>                        transform: translate<span class="hljs-constructor">X($&#123;<span class="hljs-params">textDom</span>?.<span class="hljs-params">clientWidth</span> - <span class="hljs-params">textDom</span>?.<span class="hljs-params">scrollWidth</span>&#125;<span class="hljs-params">px</span>)</span><br>                    &#125;<br>                    <span class="hljs-number">100</span>% &#123;<br>                        transform: translate<span class="hljs-constructor">X($&#123;<span class="hljs-params">textDom</span>?.<span class="hljs-params">clientWidth</span> - <span class="hljs-params">textDom</span>?.<span class="hljs-params">scrollWidth</span>&#125;<span class="hljs-params">px</span>)</span><br>                    &#125;<br>                &#125;<br>            `;<br>            styleEl.sheet.insert<span class="hljs-constructor">Rule(<span class="hljs-params">textKeyframe</span>, 0)</span>;<br>            this.appTextStyle = &#123;<br>                animation: &#x27;wordsLoop <span class="hljs-number">3</span>s linear alternate infinite&#x27;,<br>                &#x27;-webkit-animation&#x27;: &#x27;wordsLoop <span class="hljs-number">3</span>s linear alternate infinite&#x27;<br>            &#125;;<br>        &#125;<br>    &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure><p>滚动的核心动画为@keyframes部分，是否要用动态插入的方式具体要看滚动的规则是怎样的。如果需要根据文本长度动态计算，则可能需要使用动态插入的方式。</p><h3 id="动态插入个别机型不兼容问题"><a href="#动态插入个别机型不兼容问题" class="headerlink" title="动态插入个别机型不兼容问题"></a>动态插入个别机型不兼容问题</h3><p>如果动态插入的动画在个别机型上不动，需要格外注意该<b>动画样式被使用时是不是已经存在</b>。<br>比如上述代码，是先生成了wordsLoop这个keyframes并插入到样式表之后，再通过appTextStyle使用了wordsLoop。使用wordsLoop时wordsLoop是已经存在样式表中的。<br>如果将appTextStyle中的animation部分直接写在css文件中，那么代码初始运行时，wordsLoop还未生成，样式表中还没有该keyframes。即便后面生成插入了，但可能在有的机型上会不兼容不能展示动画。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>css</category>
       
     </categories>
     
