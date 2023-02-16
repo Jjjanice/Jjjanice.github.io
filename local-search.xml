@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>项目经验</title>
+    <link href="/2023/02/15/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/"/>
+    <url>/2023/02/15/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h1><h2 id="npm引入双包做实验"><a href="#npm引入双包做实验" class="headerlink" title="npm引入双包做实验"></a>npm引入双包做实验</h2><p>可引入一个包的不同版本做AB实验，实验内使用新包，实验外使用旧包</p><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-string">&quot;package&quot;</span>: <span class="hljs-string">&quot;1.0.0&quot;</span>,<br><span class="hljs-string">&quot;package-new&quot;</span>: <span class="hljs-string">&quot;npm:package@1.0.1&quot;</span>,<br></code></pre></td></tr></table></figure><h2 id="动态引入外部包：import和import"><a href="#动态引入外部包：import和import" class="headerlink" title="动态引入外部包：import和import()"></a>动态引入外部包：import和import()</h2><h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p><code>import</code>语句会被js引擎静态分析，先于模块内的其他模块执行。所以，下面这种代码会报错</p><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-keyword">if</span> (x === <span class="hljs-number">0</span>) &#123;<br>    <span class="hljs-keyword">import</span> otherMoudle <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./otherMoudle&#x27;</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>引擎处理<code>import</code>语句是在编译时，而if语句这类是运行时处理，所以<code>import</code>语句放在if代码块内会报语法错误。也就是说<code>import</code>和<code>export</code>命令只能在模块的顶层，而不能在代码块之中。</p><p>这样设计有助于提高编译效率，但也导致无法在运行时加载模块，即不能根据业务条件加载，可能会导致包体积过大。因此引入import()函数，支持动态加载。</p><h3 id="import-1"><a href="#import-1" class="headerlink" title="import()"></a>import()</h3><p><code>import()</code>类似node中的require，是在运行时加载模块，即可以实现动态加载。区别主要在于<code>import()</code>是<code>异步加载</code>，<code>require</code>是<code>同步加载</code>;</p><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;sdkPackage&#x27;</span>).then(sdk =&gt; &#123;<br>    <span class="hljs-keyword">const</span> sdkInstanse = <span class="hljs-keyword">new</span> sdk.<span class="hljs-keyword">default</span>();<br>&#125;);<br></code></pre></td></tr></table></figure><p>ES6 import()返回一个Promise对象，以上是一个例子。<code>import()</code>函数可以用在任何地方，不仅仅是模块，也可以是非模块的脚本。下面是<code>import()</code>的一些适用场合。</p><h4 id="（1）按需加载"><a href="#（1）按需加载" class="headerlink" title="（1）按需加载"></a>（1）按需加载</h4><p>import()可以在需要的时候在加载某个模块</p><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs dart">button.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>, event =&gt; &#123;<br>    <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./dialogBox.js&#x27;</span>).then(dialogBox =&gt; &#123;<br>        dialogBox.open();<br>    &#125;).<span class="hljs-keyword">catch</span>(error =&gt; &#123;<br>        <span class="hljs-comment">/* Error handling */</span><br>    &#125;);<br>&#125;);<br></code></pre></td></tr></table></figure><p>比如以上代码，<code>import()</code>方法放在click事件的监听函数中，只有用户点击了按钮才会加载这个模块。</p><h4 id="（2）条件加载"><a href="#（2）条件加载" class="headerlink" title="（2）条件加载"></a>（2）条件加载</h4><p><code>import()</code>可以放在if等代码块中，根据不同的条件加载不同的模块。</p><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-keyword">if</span> (condition) &#123;<br>    <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;moduleA&#x27;</span>).then(<span class="hljs-params">...</span>);<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;moduleB&#x27;</span>).then(<span class="hljs-params">...</span>);<br>&#125;<br></code></pre></td></tr></table></figure><p>上面代码中，根据是否满足condition，条件加载模块A或者模块B。</p><h4 id="（3）动态的模块路径"><a href="#（3）动态的模块路径" class="headerlink" title="（3）动态的模块路径"></a>（3）动态的模块路径</h4><p><code>import()</code>加载的内容可以是动态生成的路径。</p><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs scss"><span class="hljs-built_in">import</span>(fn())<span class="hljs-selector-class">.then</span>(...);<br></code></pre></td></tr></table></figure><p>上面代码中，import()的内容是一个函数，可以根据函数fn的返回结果，加载不同的模块。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>前端开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日常记录</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>踩坑记录</title>
     <link href="/2022/11/17/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
     <url>/2022/11/17/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/</url>
