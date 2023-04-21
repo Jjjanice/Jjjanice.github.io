@@ -16,29 +16,22 @@
   <meta name="author" content="六天晴">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原型链 以以下一个简单的例子入手： 1234function Person() &amp;#123;&amp;#125;var person &#x3D; new Person();  构造函数与实例对象在上述例子中，Person就是一个构造函数，person就是使用new实例化出来的一个实例对象。  prototype每个函数都有一个prototype属性，我们经常看到如下的例子： 12345678function Pe">
+    <meta name="description" content="变量对象、函数提升与变量提升 由《执行上下文栈》我们可知JavaScript每执行一段可执行代码时，都会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象 作用域链 this  本篇主要介绍变量对象以及变量对象创建的过程。 变量对象变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量对象和函数声明。 因为不同执行上下文的变量对象稍有不同，我们主要讲下 全局上下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型链">
-<meta property="og:url" content="http://example.com/2023/04/15/%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
+<meta property="og:title" content="变量对象、函数提升与变量提升">
+<meta property="og:url" content="http://example.com/2023/04/20/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%E3%80%81%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87%E4%B8%8E%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/index.html">
 <meta property="og:site_name" content="六天晴">
-<meta property="og:description" content="原型链 以以下一个简单的例子入手： 1234function Person() &amp;#123;&amp;#125;var person &#x3D; new Person();  构造函数与实例对象在上述例子中，Person就是一个构造函数，person就是使用new实例化出来的一个实例对象。  prototype每个函数都有一个prototype属性，我们经常看到如下的例子： 12345678function Pe">
+<meta property="og:description" content="变量对象、函数提升与变量提升 由《执行上下文栈》我们可知JavaScript每执行一段可执行代码时，都会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象 作用域链 this  本篇主要介绍变量对象以及变量对象创建的过程。 变量对象变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量对象和函数声明。 因为不同执行上下文的变量对象稍有不同，我们主要讲下 全局上下">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/1.png">
-<meta property="og:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/2.png">
-<meta property="og:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/3.png">
-<meta property="og:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/4.png">
-<meta property="og:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/5.png">
-<meta property="og:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/6.png">
-<meta property="article:published_time" content="2023-04-15T07:45:56.000Z">
-<meta property="article:modified_time" content="2023-04-17T09:33:07.250Z">
+<meta property="article:published_time" content="2023-04-20T13:10:13.000Z">
+<meta property="article:modified_time" content="2023-04-21T12:10:02.706Z">
 <meta property="article:author" content="六天晴">
 <meta property="article:tag" content="学习总结">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/1.png">
   
   
   
-  <title>原型链 - 六天晴</title>
+  <title>变量对象、函数提升与变量提升 - 六天晴</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -220,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="原型链"></span>
+            <span id="subtitle" data-typed-text="变量对象、函数提升与变量提升"></span>
           
         </div>
 
@@ -231,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-15 15:45" pubdate>
-          2023年4月15日 下午
+        <time datetime="2023-04-20 21:10" pubdate>
+          2023年4月20日 晚上
         </time>
       </span>
     
@@ -243,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          1.9k 字
         
       </span>
     
@@ -254,7 +247,7 @@
         
         
         
-          22 分钟
+          16 分钟
         
       </span>
     
@@ -300,61 +293,76 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">原型链</h1>
+            <h1 style="display: none">变量对象、函数提升与变量提升</h1>
             
             
               <div class="markdown-body">
                 
-                <p>原型链</p>
-<p>以以下一个简单的例子入手：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span><span class="hljs-params">()</span> &#123;<br><br>&#125;<br><span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();<br></code></pre></td></tr></table></figure>
-
-<h1 id="构造函数与实例对象"><a href="#构造函数与实例对象" class="headerlink" title="构造函数与实例对象"></a>构造函数与实例对象</h1><p>在上述例子中，<code>Person</code>就是一个构造函数，<code>person</code>就是使用new实例化出来的一个实例对象。</p>
-<p><img src="/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
-<h1 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h1><p>每个函数都有一个prototype属性，我们经常看到如下的例子：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params"></span>) &#123;<br><br>&#125;<br>Person.prototyoe.name = <span class="hljs-string">&#x27;TOM&#x27;</span>;<br><span class="hljs-keyword">var</span> person1 = <span class="hljs-keyword">new</span> Person();<br><span class="hljs-keyword">var</span> person2 = <span class="hljs-keyword">new</span> Person();<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(person1.name); <span class="hljs-comment">// TOM</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(person2.name); <span class="hljs-comment">// TOM</span><br></code></pre></td></tr></table></figure>
-<p>注意：<b>prototype是函数才会有的属性。</b>那这个prototype到底指向了什么呢？</p>
-<p>其实，<b>函数的prototype属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的原型。</b>即这个例子中，Person的prototype也就是person1和person2的原型。</p>
-<p>那什么是原型呢？可以这样理解：<b>每一个JavaScript对象（null除外）在创建的时候都会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型继承属性。</b></p>
-<p>可以用以下这张图来表示构造函数和实例原型之间的关系：</p>
-<p><img src="/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
-<p>如上图，Person是构造函数，我们用Person.prototype表示实例原型。那我们该怎么表示实例与实例原型，也就是person与Person.prototype间的关系呢？这时候我们需要介绍第二个属性：_proto_。</p>
-<h1 id="proto"><a href="#proto" class="headerlink" title="proto"></a><em>proto</em></h1><p><b>每一个JavaScript对象（除了null）都具有一个对象，叫_proto_，这个属性会指向该对象的原型，也就是实例化该对象出来的构造函数的prototype。</b><br>我们可以通过以下例子证明这一点：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params"></span>) &#123;<br><br>&#125;<br><span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(person._proto_ === Person.prototype); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
-<p>于是我们可以更新关系图如下：</p>
-<p><img src="/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/3.png" srcset="/img/loading.gif" lazyload alt="3"></p>
-<p>既然实例对象和构造函数都可以指向实例原型，那么实例原型可以指向实例对象和构造函数吗？</p>
-<p>从原型到实例对象的指向是没有的，因为一个构造函数可以生成多个实例。但是原型可以指向构造函数，这里需要介绍第三个属性：constructor。</p>
-<h1 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h1><p>每一个原型都有一个constructor属性指向关联的的构造函数。我们可以通过以下例子证明这一点：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params"></span>) &#123;<br><br>&#125;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(Person.prototype.constructor === Person); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
-<p>于是我们可以更新关系图如下：</p>
-<p><img src="/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/4.png" srcset="/img/loading.gif" lazyload alt="4"></p>
-<p>综上，我们了解了构造函数、实例原型、实例三者之间的关系，接下来了解以下实例和原型之间的关系。</p>
-<h1 id="实例与原型"><a href="#实例与原型" class="headerlink" title="实例与原型"></a>实例与原型</h1><p><b>当读取实例的属性时，如果找不到，就会查找与实例对象关联的原型中的属性，如果还是找不到，就会向上去找原型的原型，一直找到最顶层为止。</b>我们可以看以下的例子：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Person</span>(<span class="hljs-params"></span>) &#123;<br><br>&#125;<br>Person.prototype.name = <span class="hljs-string">&#x27;Tom&#x27;</span>;<br><br><span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();<br><br>person.name = <span class="hljs-string">&#x27;Jack&#x27;</span>;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(person.name); <span class="hljs-comment">// Jack</span><br><br>delete person.name;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(person.name); <span class="hljs-comment">// Tom</span><br></code></pre></td></tr></table></figure>
-<p>在以上示例中，我们给实例对象person添加了name属性，当我们打印person.name时，自然打印的是person的name属性值’Jack’。</p>
-<p>但是当我们删除person的name属性后，再读取person.name，从person对象中找不到name属性就会从person的原型也就是person._proto_，也就是Person.prototype中查找，于是打印出来的是Person.prototype的name属性值’Tom’。</p>
-<p>同样的，当我们获取preson.constructor时，其实person中并没有constructor属性，当查找不到时，就会从person的原型也就是Person.prototype中读取，即：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">person.constrcutor <span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-operator">=</span> Person.prototype.constructor <span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-operator">=</span> Person<br></code></pre></td></tr></table></figure>
-
-<p>那如果person的原型也就是person._proto_中没找到呢？原型的原型又是什么？</p>
-<h1 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h1><p>前面我们说到函数的prototype指向一个对象，也就是原型也是一个对象。既然是对象，我们就可以用原始的Object构造函数创建它：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Object();<br>obj.name = <span class="hljs-string">&#x27;TOM&#x27;</span>;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(obj.name); <span class="hljs-comment">// TOM</span><br></code></pre></td></tr></table></figure>
-<p>其实原型对象就是通过Object函数创建出来的，结合之前说的实例的_proto_指向构造函数的prototype，所以原型的_proto_就指向Object的prototype。</p>
-<p>我们可以更新关系图如下：</p>
-<p><img src="/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/5.png" srcset="/img/loading.gif" lazyload alt="5"></p>
-<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p>原型的原型是Object.prototype，那么Object.prototype的原型是什么呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">_proto_</span>); <span class="hljs-comment">// null</span><br></code></pre></td></tr></table></figure>
-<p>由上可见，Object.prototype的原型是null。</p>
-<blockquote>
-<p>null表示“没有对象”，即该处不该有值。 – 阮一峰《undefined与null的区别》</p>
+                <p>变量对象、函数提升与变量提升</p>
+<p>由《执行上下文栈》我们可知JavaScript每执行一段可执行代码时，都会创建对应的执行上下文。</p>
+<p>对于每个执行上下文，都有三个重要属性：</p>
+<ul>
+<li>变量对象</li>
+<li>作用域链</li>
+<li>this</li>
+</ul>
+<p>本篇主要介绍变量对象以及变量对象创建的过程。</p>
+<h1 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h1><p>变量对象是<b>与执行上下文相关的数据作用域</b>，存储了在上下文中定义的变量对象和函数声明。</p>
+<p>因为不同执行上下文的变量对象稍有不同，我们主要讲下 全局上下文和函数上下文 下的变量对象。</p>
+<h1 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h1><blockquote>
+<p>在顶层JavaScript代码中，可以用关键字this引用全局对象。因为全局对象是作用域链的头，这意味着所有非限定性的变量和函数名都会作为该对象的属性来查询。</p>
 </blockquote>
-<p>所以我们可以理解为：Object.prototype._proto_的值为null，也就是说Object.prototype没有原型。</p>
-<p>所以查找属性的时候，查到Object.prototype就可以停止查找了。我们可以更新关系图如下：</p>
-<p><img src="/images/%E5%8E%9F%E5%9E%8B%E9%93%BE/6.png" srcset="/img/loading.gif" lazyload alt="6"></p>
-<p>我们常说的<b>原型链就是由相互关联的原型组成的链状结构</b>，也就是图中蓝色的这条线。</p>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>参考：<a target="_blank" rel="noopener" href="https://github.com/mqyqingfeng/Blog/issues/2">https://github.com/mqyqingfeng/Blog/issues/2</a></p>
-<h1 id="相关扩展点"><a href="#相关扩展点" class="headerlink" title="相关扩展点"></a>相关扩展点</h1><p>new<br>继承</p>
+<p>全局对象我们都不陌生了，我们来进一步介绍下：</p>
+<ol>
+<li><p>可以通过this引用，在客户端JavaScript中，全局对象就是Window对象。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">console.log(this <span class="hljs-operator">=</span><span class="hljs-operator">=</span><span class="hljs-operator">=</span> window)<span class="hljs-comment">; // 在顶层JavaScript打印，结果为true，控制台可验证</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>全局对象是由Object构造函数实例化的一个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span> <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Object</span>); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>预定义一堆函数和属性，比如Date、Math、Number、String等这些内置函数。</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(Math.<span class="hljs-built_in">random</span>()); <span class="hljs-comment">// 能正常打印，不会报错，因为预定义了</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>作为全局变量的诉诸，全局变量都存储在这里。</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(this.a); <span class="hljs-comment">// 1</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>客户端JavaScript中，全局对象有window对象指向自身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">window</span>.<span class="hljs-property">a</span>); <span class="hljs-comment">// 1</span><br><br><span class="hljs-variable language_">this</span>.<span class="hljs-property">window</span>.<span class="hljs-property">b</span> = <span class="hljs-number">2</span>;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">b</span>); <span class="hljs-comment">// 2</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>通过以上几个点，我们可以很明确的知道：<b>全局上下文的变量对象就是全局对象。</b></p>
+<h1 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h1><p>在函数上下文中，我们用活动对象（Activation Object，AO）来表示变量对象。</p>
+<p>活动对象可以说是处于激活状态的变量对象，只有当进入一个执行上下文中时，这个执行上下文的变量对象才会被激活，成为活动对象。只有被激活的变量对象也就是活动对象上的各种属性才能被访问。</p>
+<p>活动对象是在进入函数上下文时被创建的，它通过函数的arguments属性初始化，arguments属性值是Arguments。</p>
+<h1 id="代码执行过程"><a href="#代码执行过程" class="headerlink" title="代码执行过程"></a>代码执行过程</h1><p>执行上下文的代码会分两个阶段处理：<b>分析和执行</b></p>
+<h2 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h2><p>当进入执行上下文时，这是很好还没有执行代码，变量对象包括</p>
+<ol>
+<li>函数的所有<b>形参</b>（针对函数上下文）<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参，属性值为undefined</li>
+</ul>
+</li>
+<li><b>函数</b>声明（也就是<b>函数提升</b>）<ul>
+<li>由名称和对应值（函数对象）组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性，则会覆盖这个属性</li>
+</ul>
+</li>
+<li><b>变量</b>声明（也就是<b>变量提升</b>）<ul>
+<li>由名称和对应值（undefined）组成一个变量对象的属性被创建</li>
+<li>如果变量名称跟已经声明的形参或函数相同，则变量声明不会干扰已经存在的这类属性</li>
+</ul>
+</li>
+</ol>
+<p>举下面这个例子：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span><span class="hljs-params">(a)</span> &#123;<br>    <span class="hljs-keyword">var</span> b = <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">c</span><span class="hljs-params">()</span> &#123;&#125;<br>    <span class="hljs-keyword">var</span> d = <span class="hljs-keyword">function</span><span class="hljs-params">()</span> &#123;&#125;;<br>    b = <span class="hljs-number">3</span>;<br>&#125;<br><br>foo(<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+<p>进入执行上下文后，该上下文的活动对象为：</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">AO = &#123;</span><br><span class="hljs-attribute">    arguments</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&#123;</span><br>        <span class="hljs-attribute">0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">1,</span><br>        <span class="hljs-attribute">length</span><span class="hljs-punctuation">:</span> <span class="hljs-string">1</span><br>    <span class="hljs-attribute">&#125;,</span><br><span class="hljs-attribute">    a</span><span class="hljs-punctuation">:</span> <span class="hljs-string">1,</span><br>    <span class="hljs-attribute">b</span><span class="hljs-punctuation">:</span> <span class="hljs-string">undefined,</span><br>    <span class="hljs-attribute">c</span><span class="hljs-punctuation">:</span> <span class="hljs-string">reference to function c()&#123;&#125;,</span><br>    <span class="hljs-attribute">d</span><span class="hljs-punctuation">:</span> <span class="hljs-string">undefined</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h2><p>在代码执行阶段，会顺序执行代码，根据代码修改变量对象的属性值。</p>
+<p>上面的例子进入代码执行后，活动对象会变为：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dts">AO = <span class="hljs-punctuation">&#123;</span><br><span class="hljs-symbol">    arguments:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-number">0</span>: <span class="hljs-number">1</span>,<br><span class="hljs-symbol">        length:</span> <span class="hljs-number">1</span><br>    <span class="hljs-punctuation">&#125;</span>,<br><span class="hljs-symbol">    a:</span> <span class="hljs-number">1</span>,<br><span class="hljs-symbol">    b:</span> <span class="hljs-number">2</span>,<br><span class="hljs-symbol">    c:</span> reference to function c()<span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span>,<br><span class="hljs-symbol">    d:</span> reference to FunctionExpression <span class="hljs-string">&quot;d&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="其他例子"><a href="#其他例子" class="headerlink" title="其他例子"></a>其他例子</h2><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(foo);<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;foo&quot;</span>);<br>&#125;<br><br><span class="hljs-keyword">var</span> foo = <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+<p>这个例子，最终会打印函数，因为<b>变量声明时若已有同名的函数或形参声明过，则不会覆盖。</b>所以foo首先声明为一个函数，foo再作为变量想声明时不会覆盖前面的函数，所以打印出来的是函数。</p>
 
                 
               </div>
@@ -362,27 +370,6 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
     <div class="post-meta">
@@ -400,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>原型链</div>
-      <div>http://example.com/2023/04/15/原型链/</div>
+      <div>变量对象、函数提升与变量提升</div>
+      <div>http://example.com/2023/04/20/变量对象、函数提升与变量提升/</div>
     </div>
     <div class="license-meta">
       
@@ -413,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月15日</div>
+          <div>2023年4月20日</div>
         </div>
       
       
@@ -443,9 +430,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/17/%E7%BB%A7%E6%89%BF/" title="继承">
+                      <a href="/2023/04/21/this%E6%8C%87%E5%90%91/" title="this指向">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">继承</span>
+                        <span class="hidden-mobile">this指向</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -453,8 +440,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/15/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/" title="项目经验">
-                        <span class="hidden-mobile">项目经验</span>
+                      <a href="/2023/04/19/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" title="作用域链">
+                        <span class="hidden-mobile">作用域链</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
