@@ -242,6 +242,86 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/06/17/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
+          垃圾回收机制
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/17/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          垃圾回收机制 为什么要回收V8引擎在执行js代码时，如果遇到函数，会为其创建函数执行上下文并压入执行上下文栈，函数的作用域包括了该函数中声明的所有变量。当函数执行完毕之后，对应的执行上下文从栈中弹出，对应的函数作用随之被销毁，其包含的变量也会统一释放并被自动回收。如果在作用域被销毁的时候，变量没有被自动回收，那么将持久占用内存，必然导致内存暴增。一般来说，v8殷勤已经帮我们自动进行了内存的分配和管
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-17 19:50" pubdate>
+              2023-06-17
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/06/06/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%88%A4%E6%96%AD/" target="_self">
+          js数据类型和判断
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/06/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%88%A4%E6%96%AD/" target="_self">
+        <div>
+          js数据类型和判断 见博客：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;jsunwang&#x2F;p&#x2F;13412887.html typeof和instanceof的判断原理：https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844903613584654344
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-06 15:50" pubdate>
+              2023-06-06
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/05/15/%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C/" target="_self">
           测试经验
         </a>
@@ -511,7 +591,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/%E7%BB%A7%E6%89%BF/" target="_self">
         <div>
-          
+          继承 原型链继承1234567891011121314function Person() &amp;#123;    this.name &#x3D; &amp;#x27;jjj&amp;#x27;;&amp;#125;Person.prototype.getName &#x3D; function() &amp;#123;    console.log(this.name);&amp;#125;function Child() &amp;#123;&amp;#125;Child
         </div>
       </a>
 
@@ -591,133 +671,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/02/15/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/" target="_self">
-          项目经验
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/02/15/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/" target="_self">
-        <div>
-          项目经验一、npm引入双包做实验可引入一个包的不同版本做AB实验，实验内使用新包，实验外使用旧包 12&quot;package&quot;: &quot;1.0.0&quot;,&quot;package-new&quot;: &quot;npm:package@1.0.1&quot;,  二、动态引入外部包：import和import()importimport语句会被js引擎静态分析，先于模
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-02-15 17:20" pubdate>
-              2023-02-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/11/17/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" target="_self">
-          踩坑记录
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/17/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" target="_self">
-        <div>
-          常用工具 css动画卡顿：尽量避免使用margin、padding、left、right等来transform，更推荐使用translate、scale 二维码解析个别解析失败问题：todo
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-17 15:52" pubdate>
-              2022-11-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -16,22 +16,22 @@
   <meta name="author" content="六天晴">
   <meta name="keywords" content="">
   
-    <meta name="description" content="闭包 前言通过前面作用域和作用域链的学习，我们可以知道，JavaScript中作用域分为全局作用域和局部作用域，与之对应的就是全局变量和局部变量。 且js的的作用域链使得局部作用域内可以直接读取全局变量。但在局部作用域外部自然无法读取局部作用域内部的局部变量。也即函数内部可以直接读取全局变量，但函数外部无法直接读取函数内的局部变量。 出于一些原因，我们有时候会需要拿到函数内的局部变量。如前面所说，">
+    <meta name="description" content="垃圾回收机制 为什么要回收V8引擎在执行js代码时，如果遇到函数，会为其创建函数执行上下文并压入执行上下文栈，函数的作用域包括了该函数中声明的所有变量。当函数执行完毕之后，对应的执行上下文从栈中弹出，对应的函数作用随之被销毁，其包含的变量也会统一释放并被自动回收。如果在作用域被销毁的时候，变量没有被自动回收，那么将持久占用内存，必然导致内存暴增。一般来说，v8殷勤已经帮我们自动进行了内存的分配和管">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包">
-<meta property="og:url" content="http://example.com/2023/04/29/%E9%97%AD%E5%8C%85/index.html">
+<meta property="og:title" content="垃圾回收机制">
+<meta property="og:url" content="http://example.com/2023/06/17/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="六天晴">
-<meta property="og:description" content="闭包 前言通过前面作用域和作用域链的学习，我们可以知道，JavaScript中作用域分为全局作用域和局部作用域，与之对应的就是全局变量和局部变量。 且js的的作用域链使得局部作用域内可以直接读取全局变量。但在局部作用域外部自然无法读取局部作用域内部的局部变量。也即函数内部可以直接读取全局变量，但函数外部无法直接读取函数内的局部变量。 出于一些原因，我们有时候会需要拿到函数内的局部变量。如前面所说，">
+<meta property="og:description" content="垃圾回收机制 为什么要回收V8引擎在执行js代码时，如果遇到函数，会为其创建函数执行上下文并压入执行上下文栈，函数的作用域包括了该函数中声明的所有变量。当函数执行完毕之后，对应的执行上下文从栈中弹出，对应的函数作用随之被销毁，其包含的变量也会统一释放并被自动回收。如果在作用域被销毁的时候，变量没有被自动回收，那么将持久占用内存，必然导致内存暴增。一般来说，v8殷勤已经帮我们自动进行了内存的分配和管">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-29T11:50:16.000Z">
-<meta property="article:modified_time" content="2023-06-05T08:14:51.183Z">
+<meta property="article:published_time" content="2023-06-17T11:50:16.000Z">
+<meta property="article:modified_time" content="2023-06-19T12:18:01.722Z">
 <meta property="article:author" content="六天晴">
 <meta property="article:tag" content="学习总结">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>闭包 - 六天晴</title>
+  <title>垃圾回收机制 - 六天晴</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="闭包"></span>
+            <span id="subtitle" data-typed-text="垃圾回收机制"></span>
           
         </div>
 
@@ -224,8 +224,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-29 19:50" pubdate>
-          2023年4月29日 晚上
+        <time datetime="2023-06-17 19:50" pubdate>
+          2023年6月17日 晚上
         </time>
       </span>
     
@@ -236,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          1.6k 字
         
       </span>
     
@@ -247,7 +247,7 @@
         
         
         
-          17 分钟
+          14 分钟
         
       </span>
     
@@ -293,56 +293,53 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">闭包</h1>
+            <h1 style="display: none">垃圾回收机制</h1>
             
             
               <div class="markdown-body">
                 
-                <p>闭包</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过前面作用域和作用域链的学习，我们可以知道，JavaScript中作用域分为全局作用域和局部作用域，与之对应的就是全局变量和局部变量。</p>
-<p>且js的的作用域链使得局部作用域内可以直接读取全局变量。但在局部作用域外部自然无法读取局部作用域内部的局部变量。<b>也即函数内部可以直接读取全局变量，但函数外部无法直接读取函数内的局部变量。</b></p>
-<p>出于一些原因，我们有时候会需要拿到函数内的局部变量。如前面所说，正常情况下是拿不到的，但是在一种特殊情况下可以做到：那就是再函数内部，再定义一个函数。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">f1</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-keyword">var</span> n = <span class="hljs-number">99</span>;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">f2</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> n; <span class="hljs-comment">// 999</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>如上例，由于f2在f1内部，此时f1内部的所有局部变量对f2都是可见的，但是反之不行。</p>
-<p>但是既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，那我们就可以在f1外部访问f1内部的局部变量了。</p>
-<h1 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h1><p>如上所示，这种<b>能够读取其他函数内部变量的函数我们称之为”闭包”，它一般是定义在一个函数内部的函数，充当将函数内部与函数外部连接起来的一座桥梁。</b></p>
-<h1 id="闭包的使用场景"><a href="#闭包的使用场景" class="headerlink" title="闭包的使用场景"></a>闭包的使用场景</h1><p>闭包最大的用途有2个：</p>
+                <p>垃圾回收机制</p>
+<h1 id="为什么要回收"><a href="#为什么要回收" class="headerlink" title="为什么要回收"></a>为什么要回收</h1><p>V8引擎在执行js代码时，如果遇到函数，会为其创建函数执行上下文并压入执行上下文栈，函数的作用域包括了该函数中声明的所有变量。<br>当函数执行完毕之后，对应的执行上下文从栈中弹出，对应的函数作用随之被销毁，其包含的变量也会统一释放并被自动回收。<br>如果在作用域被销毁的时候，变量没有被自动回收，那么将持久占用内存，必然导致内存暴增。<br>一般来说，v8殷勤已经帮我们自动进行了内存的分配和管理，让我们能更专注与开发业务本身。但是我们需要了解这其中的原理，在写代码的过程中才能足够严谨，尽量不引发内存泄露。</p>
+<h1 id="V8垃圾回收策略"><a href="#V8垃圾回收策略" class="headerlink" title="V8垃圾回收策略"></a>V8垃圾回收策略</h1><p><b>分代式垃圾回收机制</b>：根据对象的<b>存活时间</b>将内存的的垃圾回收进行不同的分代，然后对不同的分代采用不同的垃圾回收算法。</p>
+<h2 id="v8内存结构"><a href="#v8内存结构" class="headerlink" title="v8内存结构"></a>v8内存结构</h2><ul>
+<li>新生代：大多数对象的出生地、内存小且垃圾回收频繁。该区域分为两半：一半用于分配内存，一般用于在垃圾回收时将需要保留的对象复制过来。</li>
+<li>老生代：新生代的对象存活一段时间后就会转移到老生代。老生代分为：老生代指针区、老生代数据区</li>
+<li>大对象区</li>
+<li>代码区</li>
+<li>map区</li>
+</ul>
+<h2 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h2><p><b>scavenge算法</b>：将新生代内存一分为二，处于激活状态的称为From空间，处于未激活状态的称为To空间。两个空间，始终只有一个处于使用状态，另一个处于闲置状态。<br>程序中生命的对象首先会被分配到From空间，当进行垃圾回收时，如果From空间尚有存活对象，则会被复制到To空间进行保存，复制后From空间中未存活的对象全部被自动回收。<br>当复制完成后，From和To完成一次角色互换。该算法是典型的<b>牺牲空间换取时间</b>的算法。</p>
 <ul>
-<li><ol>
-<li>可以读取函数内部的局部变量</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>让函数内部的变量始终保持再内存当中</li>
-</ol>
-</li>
+<li>缺点：浪费了一半的内存用于复制</li>
+<li>对象晋升：当一个对象经过多次复制之后依旧存活，那么会被认为是一个声明周期较长的对象，在下一次进行垃圾回收机制时，该对象会被直接转移到老生嗲中，这种从新生代转移到老生代的过程称之为晋升。<br>晋升条件主要2个：1.对象是否经历过一次scavenge算法 2.To空间的内存占比是否已经超过25%</li>
 </ul>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">function</span> <span class="hljs-title function_">calcuNumber</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> n = <span class="hljs-number">999</span>;<br>    addNumber = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        n += <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">getNumber</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(n);<br>    &#125;<br>    <span class="hljs-keyword">return</span> getNumber;<br>&#125;<br><span class="hljs-keyword">var</span> getNumber = calcuNumber();<br>getNumber(); <span class="hljs-comment">// 999</span><br>addNumber();<br>getNumber(); <span class="hljs-comment">// 1000</span><br></code></pre></td></tr></table></figure>
-<p>如上例，getNumber和addNumber都是闭包函数，只是getNumber为calcuNumber中返回的函数，addNumber为全局声明但在函数内部定义的一个函数，本质两个都是函数内部的函数，且能访问函数内部的变量。<br>且从两次getNumber的调用我们可以看出来，函数f1中的局部变量n一直保存在内存中，并没有再f1调用后被自动清楚。这是因为，calcuNumber是getNumber的父函数，而getNumber被赋予了一个全局变量，这导致getNumber始终在内存中，而getNumber的存在依赖于calcuNumber，所以calcuNumber也始终再内存中，不会在调用结束后被垃圾回收机制回收。</p>
-<h1 id="闭包的原理"><a href="#闭包的原理" class="headerlink" title="闭包的原理"></a>闭包的原理</h1><p>作用域和作用域链相关</p>
-<h1 id="使用闭包的注意事项"><a href="#使用闭包的注意事项" class="headerlink" title="使用闭包的注意事项"></a>使用闭包的注意事项</h1><ul>
-<li><ol>
-<li><b>注意不要随便改变父函数内部的变量值。</b> 由于闭包会在父函数外部改变父函数内部变量的值，所以容易错乱。<blockquote>
-<p>解决方法： 把父函数当对象使用，把闭包当做父函数的公用方法，把内部变量当做父函数的<b>私有属性</b>。</p>
-</blockquote>
-</li>
-</ol>
-</li>
-<li><ol start="2">
-<li><b>闭包可能导致性能问题和内存泄露。</b>由于闭包会使得函数中的变量都被保存在内存中，内存消耗会很大，所以不能滥用闭包，否则会造成网页的性能问题，还可能导致内存泄露。</li>
-</ol>
-</li>
+<h2 id="老生代"><a href="#老生代" class="headerlink" title="老生代"></a>老生代</h2><p><b>标记清除算法和标记引用算法</b></p>
+<h3 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h3><p>分为标记和清除两个阶段。</p>
+<ul>
+<li>标记：标记阶段，从根节点出发遍历可以访问到的所有对象，通过<b>判断某个对象是否可以被访问到</b>，来标记存活的对象</li>
+<li>清除：清除阶段中，对死亡的对象进行清除，释放所有非活动的内存块</li>
+<li>缺点：清理的内存地址可能是不连续的，导致出现内存碎片的问题，导致要分配大对象而内存不足以分配，就会提前出发垃圾回收，而这种情况下的垃圾回收其实是不必要的，内存其实还有很多只是不连续，为了解决这个问题，有了标记整理算法。</li>
 </ul>
-<blockquote>
-<p>解决方法： 在退出函数之前，将不使用的全局变量删除。</p>
-</blockquote>
-<h1 id="匿名闭包与模块模式"><a href="#匿名闭包与模块模式" class="headerlink" title="匿名闭包与模块模式"></a>匿名闭包与模块模式</h1><h2 id="匿名闭包"><a href="#匿名闭包" class="headerlink" title="匿名闭包"></a>匿名闭包</h2><p>利用JavaScript<b>匿名函数</b>和<b>立即执行</b>的概念，创建一个匿名函数，并对其立即执行。所有函数内部代码都在闭包内，它可以作为一个独立模块，提供整个应用声明周期的私有和状态。</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs clojure">(<span class="hljs-name">function</span>() &#123;<br>    ...<br>&#125;())<br></code></pre></td></tr></table></figure>
-
-<h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><p>使用匿名函数的返回值，输出到全局。一个基本的模块模式示例如下：</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">const</span> counter = (<span class="hljs-keyword">function</span><span class="hljs-params">()</span> &#123;<br>    let i = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> &#123;<br>        <span class="hljs-keyword">get</span>: <span class="hljs-keyword">function</span> <span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> i;<br>        &#125;,<br>        <span class="hljs-keyword">set</span>: <span class="hljs-keyword">function</span><span class="hljs-params">(number)</span> &#123;<br>            i = number;<br>        &#125;,<br>        increment: <span class="hljs-keyword">function</span><span class="hljs-params">()</span> &#123;<br>            <span class="hljs-keyword">return</span> ++i;<br>        &#125;<br>    &#125;<br>&#125;)();<br>counter.get(); <span class="hljs-comment">// 0</span><br>counter.set(<span class="hljs-number">3</span>);<br>counter.get(); <span class="hljs-comment">// 3</span><br>counter.increment(); <span class="hljs-comment">// 4</span><br></code></pre></td></tr></table></figure>
-<p>模块模式方法不仅简单还很厉害。通过非常少的代码，可以有效的利用方法和属性相关的命名，匿名函数闭包还维持了私有内部状态。在一个对象里，组织全部的模块代码最小化了全局变量的污染也创造了使用变量。</p>
-<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>阮一峰讲闭包：<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html">https://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html</a><br>深入理解js模块模式：<a target="_blank" rel="noopener" href="https://colobu.com/2014/09/23/JavaScript-Module-Pattern-In-Depth/">https://colobu.com/2014/09/23/JavaScript-Module-Pattern-In-Depth/</a></p>
+<h3 id="标记整理"><a href="#标记整理" class="headerlink" title="标记整理"></a>标记整理</h3><ul>
+<li>标记：标记阶段，从根节点出发遍历可以访问到的所有对象，通过<b>判断某个对象是否可以被访问到</b>，来标记存活的对象</li>
+<li>整理：将活动的对象向内存的一段进行移动，移动完成后再清理掉边界外的全部内存</li>
+</ul>
+<h3 id="增量标记"><a href="#增量标记" class="headerlink" title="增量标记"></a>增量标记</h3><ul>
+<li>原因：由于JS是单线程的，当进行垃圾回收时，会阻碍主线程的执行。（称为全停顿(stop-the-world)）标记阶段同样会阻碍主线程的执行，同时老生代中会保存大量的活动对象，若对所有的堆内存遍历一次势必会造成严重卡顿</li>
+<li>原理：将原本需要一次性遍历堆内存的操作改为增量标记的方式，先标记堆内存中的一部分对象，然后暂停，将执行权重新交给JS主线程，待主线程任务执行完毕后再从原来暂停标记的地方继续标记，直到标记完整个堆内存。这个理念其实有点像React框架中的Fiber架构，只有在浏览器的空闲时间才会去遍历Fiber Tree执行对应的任务，否则延迟执行，尽可能少地影响主线程的任务，避免应用卡顿，提升应用性能</li>
+</ul>
+<h3 id="引用计数-旧，废除"><a href="#引用计数-旧，废除" class="headerlink" title="引用计数(旧，废除)"></a>引用计数(旧，废除)</h3><p>看对象是否还有被引用。如果没有指向该对象的引用，则搞对象会被视为垃圾并被垃圾回收。</p>
+<ul>
+<li>缺点：循环引用时，相互引用的变量都存在指向自身的引用，因此无法被回收，导致内存泄漏</li>
+</ul>
+<h1 id="避免内存泄露"><a href="#避免内存泄露" class="headerlink" title="避免内存泄露"></a>避免内存泄露</h1><ul>
+<li>尽量少创建全局变量</li>
+<li>手动清除定时器</li>
+<li>少用闭包</li>
+<li>清除dom引用</li>
+<li>弱引用（WeakSet和WeakMap）</li>
+</ul>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904016325902344">https://juejin.cn/post/6844904016325902344</a></p>
 
                 
               </div>
@@ -367,8 +364,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>闭包</div>
-      <div>http://example.com/2023/04/29/闭包/</div>
+      <div>垃圾回收机制</div>
+      <div>http://example.com/2023/06/17/垃圾回收机制/</div>
     </div>
     <div class="license-meta">
       
@@ -380,7 +377,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月29日</div>
+          <div>2023年6月17日</div>
         </div>
       
       
@@ -410,18 +407,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/15/%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C/" title="测试经验">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试经验</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/21/this%E6%8C%87%E5%90%91/" title="this指向">
-                        <span class="hidden-mobile">this指向</span>
+                      <a href="/2023/06/06/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%88%A4%E6%96%AD/" title="js数据类型和判断">
+                        <span class="hidden-mobile">js数据类型和判断</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
