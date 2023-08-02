@@ -242,15 +242,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/06/17/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
-          垃圾回收机制
+        <a href="/2023/07/27/React-diff%E7%AE%97%E6%B3%95/" target="_self">
+          React-diff算法
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/17/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/27/React-diff%E7%AE%97%E6%B3%95/" target="_self">
         <div>
-          垃圾回收机制 为什么要回收V8引擎在执行js代码时，如果遇到函数，会为其创建函数执行上下文并压入执行上下文栈，函数的作用域包括了该函数中声明的所有变量。当函数执行完毕之后，对应的执行上下文从栈中弹出，对应的函数作用随之被销毁，其包含的变量也会统一释放并被自动回收。如果在作用域被销毁的时候，变量没有被自动回收，那么将持久占用内存，必然导致内存暴增。一般来说，v8殷勤已经帮我们自动进行了内存的分配和管
+          diff算法使用虚拟dom的原因在传统web应用中，往往会把数据的真实变化实时地更新到界面上，于是每次数据的微小变动都会引起DOM树的重新渲染。虚拟DOM的目的是将所有的操作累加起来，计算出所有的变化后，统一更新DOM一次性更新到界面上。  同级对比 单个节点类型不同直接删除 标签类型相同，属性修改、位置挪动等实现复用  使用diff算法找出更新前后v-dom的差异，diff算法三大策略：  只对
         </div>
       </a>
 
@@ -258,88 +258,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-17 19:50" pubdate>
-              2023-06-17
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/06/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%88%A4%E6%96%AD/" target="_self">
-          js数据类型和判断
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/06/06/js%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%88%A4%E6%96%AD/" target="_self">
-        <div>
-          js数据类型和判断 见博客：https:&#x2F;&#x2F;www.cnblogs.com&#x2F;jsunwang&#x2F;p&#x2F;13412887.html typeof和instanceof的判断原理：https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844903613584654344
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-06 15:50" pubdate>
-              2023-06-06
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/15/%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C/" target="_self">
-          测试经验
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/05/15/%E6%B5%8B%E8%AF%95%E7%BB%8F%E9%AA%8C/" target="_self">
-        <div>
-          测试经验 charles修改clientip使用rewrite修改接口的入参和返回。 https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_44330336&#x2F;article&#x2F;details&#x2F;122843706
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-15 15:00" pubdate>
-              2023-05-15
+            <time datetime="2023-07-27 15:22" pubdate>
+              2023-07-27
             </time>
           </div>
         
@@ -354,7 +274,129 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
+  <a href="/categories/React-diff%E7%AE%97%E6%B3%95/" class="category-chain-item">React-diff算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/25/React%20Fiber/" target="_self">
+          React总结
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/25/React%20Fiber/" target="_self">
+        <div>
+          React Fiberreact架构设计如下：![1](&#x2F;images&#x2F;React Fiber&#x2F;1.png) 为什么引入fiber(fiber解决了什么问题)React16之前，使用的是栈调和器，将所有v-dom全部遍历完成后，reconciler才能给出当前需要修改的真实dom的信息，并传递给renderer，进行渲染。带来的问题是：这个过程是不可中断的，如果需要渲
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-25 15:05" pubdate>
+              2023-07-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/React-Fiber/" class="category-chain-item">React Fiber</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/15/%E9%87%8D%E6%8E%92%E5%92%8C%E9%87%8D%E7%BB%98(todo)/" target="_self">
+          重排和重绘
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/15/%E9%87%8D%E6%8E%92%E5%92%8C%E9%87%8D%E7%BB%98(todo)/" target="_self">
+        <div>
+          https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;6844904083212468238
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-15 17:50" pubdate>
+              2023-07-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/css/" class="category-chain-item">css</a>
   
   
 
@@ -383,15 +425,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/29/%E9%97%AD%E5%8C%85/" target="_self">
-          闭包
+        <a href="/2023/07/15/rollup(todo)/" target="_self">
+          rollup
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/29/%E9%97%AD%E5%8C%85/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/15/rollup(todo)/" target="_self">
         <div>
-          闭包 前言通过前面作用域和作用域链的学习，我们可以知道，JavaScript中作用域分为全局作用域和局部作用域，与之对应的就是全局变量和局部变量。 且js的的作用域链使得局部作用域内可以直接读取全局变量。但在局部作用域外部自然无法读取局部作用域内部的局部变量。也即函数内部可以直接读取全局变量，但函数外部无法直接读取函数内的局部变量。 出于一些原因，我们有时候会需要拿到函数内的局部变量。如前面所说，
+          附录https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;486644411?utm_id&#x3D;0
         </div>
       </a>
 
@@ -399,241 +441,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-29 19:50" pubdate>
-              2023-04-29
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/21/this%E6%8C%87%E5%90%91/" target="_self">
-          this指向
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/21/this%E6%8C%87%E5%90%91/" target="_self">
-        <div>
-          this指向 由《执行上下文栈》我们可知JavaScript每执行一段可执行代码时，都会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象 作用域链 this  本篇主要介绍this。 不同调用场景下的this首先需要明确的是，不像函数作用域是在函数定义的时候就确定了，this的指向在函数定义的时候是无法确定的，只有函数执行的时候才能确定this到底指向谁。 在非箭头函数下
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-21 20:11" pubdate>
-              2023-04-21
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/20/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%E3%80%81%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87%E4%B8%8E%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/" target="_self">
-          变量对象、函数提升与变量提升
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/20/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%E3%80%81%E5%87%BD%E6%95%B0%E6%8F%90%E5%8D%87%E4%B8%8E%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/" target="_self">
-        <div>
-          变量对象、函数提升与变量提升 由《执行上下文栈》我们可知JavaScript每执行一段可执行代码时，都会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象 作用域链 this  本篇主要介绍变量对象以及变量对象创建的过程。 变量对象变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量对象和函数声明。 因为不同执行上下文的变量对象稍有不同，我们主要讲下 全局上下
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-20 21:10" pubdate>
-              2023-04-20
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/19/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" target="_self">
-          作用域链
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/19/%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" target="_self">
-        <div>
-          作用域链 由《执行上下文栈》我们可知JavaScript每执行一段可执行代码时，都会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象 作用域链 this  本篇主要介绍作用域链。 作用域什么是作用域？作用域是指程序源代码中定义变量的区域。它规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。 JavaScript采用词法作用域，也就是静态作用域。 静态作用域与动态
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-19 21:20" pubdate>
-              2023-04-19
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/19/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" target="_self">
-          执行上下文栈
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/19/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%A0%88/" target="_self">
-        <div>
-          执行上下文栈 首先我们都知道JavaScript代码是顺序执行，那么具体是怎么做的呢？我们来了解一下作用域和执行上下文。 执行上下文我们知道JavaScript是顺序执行的，但是又有变量提升和函数提升的机制，这两点为什么不冲突呢？ 因为JavaScript引擎并非一行一行地分析和执行程序，而是一段一段地分析执行。当执行一段代码的时候，会先进行一个“准备工作”，就包括前面所说的变量提升和函数提升。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-19 20:07" pubdate>
-              2023-04-19
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/17/%E7%BB%A7%E6%89%BF/" target="_self">
-          继承
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/17/%E7%BB%A7%E6%89%BF/" target="_self">
-        <div>
-          继承 原型链继承1234567891011121314function Person() &amp;#123;    this.name &#x3D; &amp;#x27;jjj&amp;#x27;;&amp;#125;Person.prototype.getName &#x3D; function() &amp;#123;    console.log(this.name);&amp;#125;function Child() &amp;#123;&amp;#125;Child
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-17 10:56" pubdate>
-              2023-04-17
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/15/%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
-          原型链
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/15/%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
-        <div>
-          原型链 以以下一个简单的例子入手： 1234function Person() &amp;#123;&amp;#125;var person &#x3D; new Person();  构造函数与实例对象在上述例子中，Person就是一个构造函数，person就是使用new实例化出来的一个实例对象。  prototype每个函数都有一个prototype属性，我们经常看到如下的例子： 12345678function Pe
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-15 15:45" pubdate>
-              2023-04-15
+            <time datetime="2023-07-15 17:44" pubdate>
+              2023-07-15
             </time>
           </div>
         
@@ -648,7 +457,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="category-chain-item">工程化</a>
   
   
 
@@ -671,11 +480,377 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/12/webpack/" target="_self">
+          webpack
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/12/webpack/" target="_self">
+        <div>
+          webpack是什么类似一条生产线，要经历一系列处理流程后才能将源文件转化为输出结果。这条生产线上的每个处理流程的职责都是单一的，多个流程之间存在依赖关系，只有完成当前处理后才能交给下一个流程去处理。 webpack的重要性 降低开发复杂度 模块化：复杂的程序细化为小文件 预处理：scss、less等css预处理器 可以使用类似于TypeScript这种在JavaScript基础上拓展的开发语言，
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-12 15:47" pubdate>
+              2023-07-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="category-chain-item">工程化</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">#学习总结</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/11/css%E5%B8%83%E5%B1%80/" target="_self">
+          css布局
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/11/css%E5%B8%83%E5%B1%80/" target="_self">
+        <div>
+          两栏布局三栏布局
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-11 17:56" pubdate>
+              2023-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/css/" class="category-chain-item">css</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/11/css3%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">
+          css3新特性
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/11/css3%E6%96%B0%E7%89%B9%E6%80%A7/" target="_self">
+        <div>
+          选择器css3新增了一些属性选择器和伪类，主要如下所示：    选择器 实例 描述    [attr~&#x3D;value] a[class~&#x3D;’aaa’] 匹配class中含有aaa的a标签   [attr^&#x3D;value] a[class^&#x3D;”box”] 匹配class开头为box的a标签   [attr$&#x3D;value] a[class$&#x3D;”b
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-11 15:56" pubdate>
+              2023-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/css/" class="category-chain-item">css</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/10/css%E9%80%89%E6%8B%A9%E5%99%A8%E5%92%8C%E4%BC%98%E5%85%88%E7%BA%A7/" target="_self">
+          css选择器和优先级
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/10/css%E9%80%89%E6%8B%A9%E5%99%A8%E5%92%8C%E4%BC%98%E5%85%88%E7%BA%A7/" target="_self">
+        <div>
+          css选择器css选择器分为以下几种：  简单选择器 伪类 伪元素 属性选择器 组合器 多用选择器  简单选择器 元素选择器：元素类型span…  类选择器：.classname  id选择器: #idname  通用选择器：*   伪类一个css伪类是一个以冒号(:)作为前缀的关键字，一般是表示元素的特定状态。用于添加到指定的选择器后用于指定样式在特定状态下呈现。常见的伪类有：  active
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-10 21:17" pubdate>
+              2023-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/css/" class="category-chain-item">css</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/09/flex%E5%B8%83%E5%B1%80/" target="_self">
+          flex布局
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/09/flex%E5%B8%83%E5%B1%80/" target="_self">
+        <div>
+          基本概念flex布局意为弹性布局，用来为盒状模型提供最大的灵活性。设置为flex布局后，子元素的float、clear、vertical-align属性将失效。 采用flex布局的元素，称为flex容器，它的所有子元素自动成为容器成员，称之为项目。 容器默认存在两根轴：  水平的主轴。主轴开始位置叫main start，主轴结束位置叫main end 垂直的交叉轴。交叉轴的开始位置叫cross s
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-09 17:56" pubdate>
+              2023-07-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/css/" class="category-chain-item">css</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/07/09/BFC%E5%8E%9F%E7%90%86/" target="_self">
+          BFC原理
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/07/09/BFC%E5%8E%9F%E7%90%86/" target="_self">
+        <div>
+          常见定位方案普通文档流普通流中，元素按照其在HTML中的先后位置至上而下布局。这个过程中，行内元素水平排列，直到当行被占满然后换行，块级元素则会被渲染为完整的一个新行。除非特别指定，否则所有元素默认都是普通流定位。 浮动在浮动布局中，元素首先按照普通流的位置出现，然后根据浮动的方向尽可能的向左边或右边偏移，其效果与印刷排版中的文本环绕相似。 绝对定位在绝对定位布局中，元素会整体脱离普通流，因为绝对
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-07-09 17:05" pubdate>
+              2023-07-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/css/" class="category-chain-item">css</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">#日常记录</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
